@@ -1,6 +1,13 @@
 resource "aws_amplify_app" "portfolio" {
   name     = "portfolio"
   platform = "WEB_COMPUTE"
+  repository = "https://github.com/donatron/portfolio-2025"
+
+  lifecycle {
+    ignore_changes = [
+      access_token
+    ]
+  }
 }
 
 resource "aws_amplify_branch" "dev" {
