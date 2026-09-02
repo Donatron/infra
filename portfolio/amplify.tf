@@ -1,7 +1,14 @@
 resource "aws_amplify_app" "portfolio" {
-  name     = "portfolio"
-  platform = "WEB_COMPUTE"
+  name       = "portfolio"
+  platform   = "WEB_COMPUTE"
   repository = "https://github.com/donatron/portfolio-2025"
+
+  compute_role_arn     = aws_iam_role.amplify_compute.arn
+  iam_service_role_arn = aws_iam_role.amplify_service.arn
+
+  environment_variables = {
+    EMAIL_ADDRESS = var.email_address
+  }
 
   lifecycle {
     ignore_changes = [
